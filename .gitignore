@@ -3,5 +3,7 @@ dev/
 bin/
 logs/
 data/
+scripts/
+configs/webhook.*.yaml
 *.exe
 *.out
