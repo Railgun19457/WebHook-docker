@@ -1,0 +1,20 @@
+global:
+  requestTimeoutSeconds: 30
+  maxConcurrentJobsPerHook: 1
+  rejectWhenBusy: true
+
+hooks:
+  - id: e2e
+    path: /hooks/e2e
+    provider: github
+    secretEnv: GITHUB_E2E_SECRET
+    enabled: true
+    eventTypes: [push]
+    executionMode: local
+    commandGroups:
+      - quick
+
+commandGroups:
+  quick:
+    steps:
+      - echo e2e-webhook-triggered

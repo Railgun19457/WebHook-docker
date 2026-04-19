@@ -1,0 +1,35 @@
+global:
+  requestTimeoutSeconds: 60
+  maxConcurrentJobsPerHook: 1
+  rejectWhenBusy: true
+
+hooks:
+  - id: blog-update
+    path: /hooks/blog-update
+    provider: github
+    secretEnv: GITHUB_BLOG_WEBHOOK_SECRET
+    enabled: true
+    eventTypes: [push]
+    executionMode: local
+    commandGroups:
+      - update1
+      - restart-blog
+
+commandGroups:
+  update1:
+    steps:
+      - sh /app/scripts/update.sh
+  restart-blog:
+    steps:
+      - echo "restart application container"
+
+sshProfiles:
+  prod-host:
+    host: 127.0.0.1
+    port: 22
+    username: deploy
+    strictHostKeyChecking: true
+    knownHostsPath: /app/data/known_hosts
+    auth:
+      method: key
+      privateKeyPath: /run/secrets/id_rsa
