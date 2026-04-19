@@ -1,3 +1,4 @@
+#配置模板
 global:
   requestTimeoutSeconds: 60
   maxConcurrentJobsPerHook: 1
