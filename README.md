@@ -54,6 +54,8 @@ docker-compose up --build -d
 docker compose up --build -d
 ```
 
+如果构建阶段遇到 Go 模块下载超时，可以在 `.env` 中加入 `GOPROXY=https://goproxy.cn,direct` 后再重试，或临时在命令行里覆盖该变量。
+
 默认会对外暴露 `8080` 端口。健康检查接口为 `GET /health`，就绪检查接口为 `GET /ready`。
 
 ## 发送 WebHook
